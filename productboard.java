@@ -1443,8 +1443,8 @@ public class productboard extends javax.swing.JFrame {
         pack();
     }// </editor-fold>                        
 
-    private void CheckoutActionPerformed(java.awt.event.ActionEvent evt) {                                         
-         // Perform the checkout process here
+    private void CheckoutActionPerformed(java.awt.event.ActionEvent evt) {
+    // Perform the checkout process here
     // For demonstration purposes, let's assume we are displaying a confirmation message dialog
     
     int result = JOptionPane.showConfirmDialog(this, "Are you sure you want to proceed with the checkout?");
@@ -1454,15 +1454,27 @@ public class productboard extends javax.swing.JFrame {
         // Add your code to perform the necessary actions for the checkout process
         
         // For example, you could display a success message dialog
-        JOptionPane.showMessageDialog(this, "Checkout successful!");
+        int choice = JOptionPane.showOptionDialog(this, "Checkout successful! What would you like to do?", "Checkout",
+            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[] { "Exit", "Continue Shopping" },
+            "Exit");
+        
+        if (choice == JOptionPane.YES_OPTION) {
+            // User clicked "Exit"
+            // Add code to exit the application
+            System.exit(0);
+        } else if (choice == JOptionPane.NO_OPTION) {
+            // User clicked "Continue Shopping"
+            // Add code to handle continuing shopping or any other desired behavior
+            // For example, you could reset the shopping cart or update the UI
+        }
         
         // You can also add code to update the UI or perform any other necessary operations
     } else {
         // User clicked "No" or closed the dialog
         // Add code to handle the cancellation or any other desired behavior
     }
-    }                                        
-
+}
+                                 
     private void AdminActionPerformed(java.awt.event.ActionEvent evt) {                                      
         // Perform the admin action here
     // For demonstration purposes, let's assume we are displaying a login dialog
