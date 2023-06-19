@@ -202,9 +202,9 @@ public class productboard extends javax.swing.JFrame {
         jSpinner12 = new javax.swing.JSpinner();
         jLabel22 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
-        BTNreceipt = new javax.swing.JButton();
+        Admin = new javax.swing.JButton();
         BTNexit = new javax.swing.JButton();
-        BTNtotal = new javax.swing.JButton();
+        Checkout = new javax.swing.JButton();
         BTNreset = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
@@ -1220,12 +1220,12 @@ public class productboard extends javax.swing.JFrame {
 
         jPanel6.setBackground(new java.awt.Color(204, 204, 204));
 
-        BTNreceipt.setBackground(new java.awt.Color(0, 153, 255));
-        BTNreceipt.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
-        BTNreceipt.setText("Receipt");
-        BTNreceipt.addActionListener(new java.awt.event.ActionListener() {
+        Admin.setBackground(new java.awt.Color(0, 153, 255));
+        Admin.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
+        Admin.setText("Admin");
+        Admin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTNreceiptActionPerformed(evt);
+                AdminActionPerformed(evt);
             }
         });
 
@@ -1238,12 +1238,12 @@ public class productboard extends javax.swing.JFrame {
             }
         });
 
-        BTNtotal.setBackground(new java.awt.Color(153, 255, 51));
-        BTNtotal.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
-        BTNtotal.setText("Checkout");
-        BTNtotal.addActionListener(new java.awt.event.ActionListener() {
+        Checkout.setBackground(new java.awt.Color(153, 255, 51));
+        Checkout.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
+        Checkout.setText("Checkout");
+        Checkout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTNtotalActionPerformed(evt);
+                CheckoutActionPerformed(evt);
             }
         });
 
@@ -1262,9 +1262,9 @@ public class productboard extends javax.swing.JFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addComponent(BTNtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Checkout, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(BTNreceipt, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Admin, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(BTNreset, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -1276,9 +1276,9 @@ public class productboard extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BTNreceipt, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Admin, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BTNexit, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BTNtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Checkout, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BTNreset, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
@@ -1443,13 +1443,51 @@ public class productboard extends javax.swing.JFrame {
         pack();
     }// </editor-fold>                        
 
-    private void BTNtotalActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+    private void CheckoutActionPerformed(java.awt.event.ActionEvent evt) {                                         
+         // Perform the checkout process here
+    // For demonstration purposes, let's assume we are displaying a confirmation message dialog
+    
+    int result = JOptionPane.showConfirmDialog(this, "Are you sure you want to proceed with the checkout?");
+    
+    if (result == JOptionPane.YES_OPTION) {
+        // User clicked "Yes" to proceed with checkout
+        // Add your code to perform the necessary actions for the checkout process
+        
+        // For example, you could display a success message dialog
+        JOptionPane.showMessageDialog(this, "Checkout successful!");
+        
+        // You can also add code to update the UI or perform any other necessary operations
+    } else {
+        // User clicked "No" or closed the dialog
+        // Add code to handle the cancellation or any other desired behavior
+    }
     }                                        
 
-    private void BTNreceiptActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
-    }                                          
+    private void AdminActionPerformed(java.awt.event.ActionEvent evt) {                                      
+        // Perform the admin action here
+    // For demonstration purposes, let's assume we are displaying a login dialog
+    
+    String username = JOptionPane.showInputDialog(this, "Enter your username:");
+    String password = JOptionPane.showInputDialog(this, "Enter your password:");
+    
+    if (username.equals("admin") && password.equals("password")) {
+        // Admin login successful
+        // Add your code to perform the necessary actions for the admin functionality
+        
+        // For example, you could display an admin panel or execute admin-related operations
+        
+        // Display a success message dialog
+        JOptionPane.showMessageDialog(this, "Admin login successful!");
+        
+        // You can also add code to update the UI or perform any other necessary operations
+    } else {
+        // Admin login failed
+        // Add code to handle incorrect login or any other desired behavior
+        
+        // Display an error message dialog
+        JOptionPane.showMessageDialog(this, "Invalid username or password. Please try again.");
+    }
+    }                                     
 
     private void BTNresetActionPerformed(java.awt.event.ActionEvent evt) {                                         
         reset ();           
@@ -1529,10 +1567,10 @@ public class productboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify                     
+    private javax.swing.JButton Admin;
     private javax.swing.JButton BTNexit;
-    private javax.swing.JButton BTNreceipt;
     private javax.swing.JButton BTNreset;
-    private javax.swing.JButton BTNtotal;
+    private javax.swing.JButton Checkout;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox10;
     private javax.swing.JCheckBox jCheckBox11;
