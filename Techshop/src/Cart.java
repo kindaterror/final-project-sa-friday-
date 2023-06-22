@@ -12,7 +12,7 @@ public class Cart extends JFrame {
     public Cart(ProductCatalog productCatalog) {
         this.productCatalog = productCatalog;
         products = new ArrayList<>();
-
+// oang
         setTitle("Cart");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(300, 200);
