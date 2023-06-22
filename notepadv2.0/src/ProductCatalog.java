@@ -3,8 +3,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ProductCatalog extends JFrame {
     private Menu menu;
@@ -18,10 +16,19 @@ public class ProductCatalog extends JFrame {
         setSize(400, 300);
         setLayout(new BorderLayout());
 
-        JPanel panel = new JPanel(new BorderLayout());
+        JPanel panel = new JPanel(new BorderLayout()); // Main panel
 
         String directoryPath = "products/";
         displayProducts(directoryPath, panel);
+
+        JPanel searchPanel = new JPanel(new FlowLayout()); // Panel for search bar
+        JTextField searchField = new JTextField(20);
+        JButton searchButton = new JButton("Search");
+
+        searchPanel.add(searchField);
+        searchPanel.add(searchButton);
+
+        panel.add(searchPanel, BorderLayout.NORTH); // Add search panel to the NORTH position
 
         JButton cartButton = new JButton("View Cart");
         cartButton.addActionListener(new ActionListener() {
@@ -29,19 +36,75 @@ public class ProductCatalog extends JFrame {
                 showCart();
             }
         });
-        panel.add(cartButton, BorderLayout.SOUTH);
 
+        if (parts.length == 4 && parts[3].equals("A")) {
+Jbutton adminButton = new Jbutton("Admin")
+  adminButton.setVisible(true);
+
+}
+
+ try (BufferedReader reader = new BufferedReader(new FileReader("users.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length == 4 && parts[3].equals("A")) {
+        Jbutton adminButton = new Jbutton("Admin")
+        adminButton.setVisible(true);
+
+        }
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+
+    }
+
+        JButton exitButton = new JButton("Exit");
+
+        exitButton.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+
+                System.exit(0);
+
+            }
+
+        });
+
+        JPanel buttonPanel = new JPanel(); // Button panel
+        buttonPanel.add(cartButton);
+        buttonPanel.add(adminButton);
+        buttonPanel.add(exitButton);
+        panel.add(buttonPanel, BorderLayout.SOUTH); // Add button panel to the SOUTH position
+        add(panel, BorderLayout.CENTER);
+
+    }   
         JButton exitButton = new JButton("Exit");
         exitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
             }
         });
-        panel.add(exitButton, BorderLayout.NORTH);
 
+        JPanel buttonPanel = new JPanel(); // Button panel
+        buttonPanel.add(cartButton);
+        buttonPanel.add(adminButton);
+        buttonPanel.add(exitButton);
+        panel.add(buttonPanel, BorderLayout.SOUTH); // Add button panel to the SOUTH position
         add(panel, BorderLayout.CENTER);
     }
 
+    private void openAdminPage() {
+        // Redirect to the admin class or page
+        Admin admin = new Admin();
+        admin.setVisible(true);
+        setVisible(false);
+    }
+    
     private void displayProducts(String directoryPath, JPanel panel) {
         JPanel productPanel = new JPanel(new GridLayout(0, 1, 0, 5));
 
