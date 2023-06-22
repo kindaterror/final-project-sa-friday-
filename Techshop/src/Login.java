@@ -125,7 +125,7 @@ public class Login extends JFrame {
         for (String line : lines) {
             String[] parts = line.split(",");
             if (parts[0].equals(username) && parts[1].equals(password)) {
-                return parts[2];
+                return parts[1];
             }
         }
     } catch (IOException e) {

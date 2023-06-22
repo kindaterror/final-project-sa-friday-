@@ -1,0 +1,2 @@
+Product Name,Product Price,Product Description,
+tcl 10 5g ,1335,the camera is good and the the screen is just like a tv but smaller,

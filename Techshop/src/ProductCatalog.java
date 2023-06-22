@@ -114,13 +114,14 @@ public class ProductCatalog extends JFrame {
     }
 
     public void addToCart(Product product) {
-        if (cart == null) {
-            cart = new Cart(this);
-        }
-        cart.addProduct(product);
-        JOptionPane.showMessageDialog(ProductCatalog.this, "Product added to cart.", "Add to Cart",
-                JOptionPane.INFORMATION_MESSAGE);
+    if (cart == null) {
+        cart = new Cart(this);
     }
+    cart.addProduct(product);
+    JOptionPane.showMessageDialog(ProductCatalog.this, "Product added to cart.", "Add to Cart",
+            JOptionPane.INFORMATION_MESSAGE);
+}
+
 
     private void showCart() {
         if (cart == null) {
