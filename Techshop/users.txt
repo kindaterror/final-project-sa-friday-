@@ -1,0 +1,8 @@
+ivan,ivan@mail.com,123,R
+ponio,ponio@mail.com,123,R
+king,king@gmail.com,1234,R
+ban,ban@gmail.com,123,R
+onag,1234,onag@gmail.com,A
+king,12345,king@gmail.com,R
+asda,123,asda@gmail.com,A
+onag,qwe,onag@gmail,com,A
