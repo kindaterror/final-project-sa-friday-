@@ -14,6 +14,7 @@ public class Registration extends JFrame {
     private JTextField emailField;
     private JCheckBox adminCheckBox;
     private ProductCatalog productCatalog;
+    static User user;
 
     public Registration(Menu menu, ProductCatalog productCatalog) {
         this.menu = menu;
@@ -107,6 +108,8 @@ public class Registration extends JFrame {
         String email = emailField.getText();
         boolean isAdmin = adminCheckBox.isSelected();
 
+        user = new User(email, password, username, isAdmin);
+
         createRegistrationFile(username, email, password, isAdmin);
 
         JOptionPane.showMessageDialog(Registration.this, "Registration successful.", "Registration",
@@ -124,7 +127,7 @@ public class Registration extends JFrame {
     }
 
     public static void createRegistrationFile(String username, String email, String password, boolean isAdmin) {
-        String filePath = "C:/Users/Quirf Ivan A. Onag/final-project-sa-friday-/Techshop/users.txt";
+        String filePath = "C:/Users/Quirf Ivan A. Onag/homework/notepadv2.0/users.txt";
 
         File file = new File(filePath);
         if (!file.exists()) {
@@ -136,6 +139,8 @@ public class Registration extends JFrame {
                 return;
             }
         }
+
+        
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
             writer.write(username + ",");

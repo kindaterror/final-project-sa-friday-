@@ -12,7 +12,9 @@ public class Login extends JFrame {
     private Menu menu;
     private JTextField usernameField;
     private JPasswordField passwordField;
+    private JTextField emailField;
     private ProductCatalog productCatalog;
+    static User user;
 
     public Login(Menu menu, ProductCatalog productCatalog) {
         this.menu = menu;
@@ -23,7 +25,7 @@ public class Login extends JFrame {
         setSize(300, 200);
         setLayout(new BorderLayout());
 
-        JPanel panel = new JPanel(new GridLayout(3, 2));
+        JPanel panel = new JPanel(new GridLayout(4, 2));
 
         JLabel usernameLabel = new JLabel("Username:");
         panel.add(usernameLabel);
@@ -36,6 +38,12 @@ public class Login extends JFrame {
 
         passwordField = new JPasswordField();
         panel.add(passwordField);
+
+        // JLabel emailLabel = new JLabel("Email:");
+        // panel.add(emailLabel);
+
+        // emailField = new JTextField();
+        // panel.add(emailField);
 
         JButton loginButton = new JButton("Login");
         loginButton.addActionListener(new ActionListener() {
@@ -67,6 +75,19 @@ public class Login extends JFrame {
                     JOptionPane.INFORMATION_MESSAGE);
             usernameField.setText("");
             passwordField.setText("");
+            //emailField.setText("");
+
+            String email = getEmail(username, password);
+            String adminStatus = getAdminPrivelege(username, password);
+
+            boolean isAdmin = false;
+            if (adminStatus.equals("A")) {
+                isAdmin = true;
+            }
+
+            user = new User(email, password, username, isAdmin);
+
+            System.out.println("hellooo");
 
             if (productCatalog == null) {
                 productCatalog = new ProductCatalog(menu);
@@ -79,8 +100,10 @@ public class Login extends JFrame {
             passwordField.setText("");
         }
     }
+ 
 
     public static boolean checkCredentials(String username, String password) {
+        
         try {
             List<String> lines = Files.readAllLines(Paths.get(USERS_FILE));
             for (String line : lines) {
@@ -95,8 +118,44 @@ public class Login extends JFrame {
         return false;
     }
 
+    public static String getEmail(String username, String password) {
+    
+    try {
+        List<String> lines = Files.readAllLines(Paths.get(USERS_FILE));
+        for (String line : lines) {
+            String[] parts = line.split(",");
+            if (parts[0].equals(username) && parts[1].equals(password)) {
+                return parts[2];
+            }
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+        return "";
+    }
+
+    public static String getAdminPrivelege(String username, String password) {
+    
+    try {
+        List<String> lines = Files.readAllLines(Paths.get(USERS_FILE));
+        for (String line : lines) {
+            String[] parts = line.split(",");
+            if (parts[0].equals(username) && parts[1].equals(password)) {
+                return parts[3];
+            }
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+        return "";
+    }
+
+    
+
     private void goBack() {
         menu.setVisible(true);
         dispose();
     }
+
+
 }
