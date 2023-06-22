@@ -2,11 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-
 
 public class ProductCatalog extends JFrame {
     private Menu menu;
@@ -41,47 +37,35 @@ public class ProductCatalog extends JFrame {
             }
         });
 
-      JButton adminButton = new JButton("Admin");
-        if (isAdminUser()) {
-            adminButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    openAdminPage();
-                }
+        JButton adminButton = new JButton("Admin");
+        adminButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                openAdminPage();
+            }
+        });
+ 
+        JButton exitButton = new JButton("Exit");
+        exitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
 
-                private void openAdminPage() {
-                }
-            });
-            panel.add(adminButton);
-        }
+        JPanel buttonPanel = new JPanel(); // Button panel
+        buttonPanel.add(cartButton);
+        buttonPanel.add(adminButton);
+        buttonPanel.add(exitButton);
 
-        // Add other components to the panel...
+        panel.add(buttonPanel, BorderLayout.SOUTH); // Add button panel to the SOUTH position
+
+        add(panel, BorderLayout.CENTER);
     }
 
-    private boolean isAdminUser() {
-        String filePath = "users.txt";
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line = reader.readLine();
-            if (line != null) {
-                if (line.equals("A")) {
-                    return true;  // User has admin role (A)
-                } else if (line.equals("R")) {
-                    return false; // User has regular role (R)
-                } else {
-                    System.out.println("Unknown role: " + line);
-                    // Perform actions for unknown role or handle the case accordingly
-                }
-            } else {
-                System.out.println("File is empty.");
-                // Perform actions when file is empty or handle the case accordingly
-            }
-        } catch (IOException e) {
-            System.out.println("Error reading file: " + e.getMessage());
-            // Handle file reading error
-        }
-
-        // Default behavior if the file couldn't be read or an error occurred
-        return false;
+    private void openAdminPage() {
+        // Redirect to the admin class or page
+        Admin admin = new Admin();
+        admin.setVisible(true);
+        setVisible(false);
     }
     
     private void displayProducts(String directoryPath, JPanel panel) {
