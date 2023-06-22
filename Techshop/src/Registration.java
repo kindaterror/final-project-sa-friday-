@@ -124,7 +124,7 @@ public class Registration extends JFrame {
     }
 
     public static void createRegistrationFile(String username, String email, String password, boolean isAdmin) {
-        String filePath = "C:/Users/Quirf Ivan A. Onag/homework/notepadv2.0/users.txt";
+        String filePath = "C:/Users/Quirf Ivan A. Onag/final-project-sa-friday-/Techshop/users.txt";
 
         File file = new File(filePath);
         if (!file.exists()) {
