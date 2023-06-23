@@ -1,0 +1,3 @@
+Payment Method: paypal
+Username: kingban@gmail.com
+Password: qwe

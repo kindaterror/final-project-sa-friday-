@@ -24,6 +24,7 @@ public class Login extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(300, 200);
         setLayout(new BorderLayout());
+        this.setLocationRelativeTo(null); // center form in the screen.
 
         JPanel panel = new JPanel(new GridLayout(4, 2));
 

@@ -24,6 +24,7 @@ public class Registration extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(400, 300);
         setLayout(new BorderLayout());
+        this.setLocationRelativeTo(null); // center form in the screen.
 
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));

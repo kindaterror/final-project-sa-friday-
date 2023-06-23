@@ -1,0 +1,3 @@
+Payment Method: mastercard
+Email: onag@gmail.com
+Password: qwe

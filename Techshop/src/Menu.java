@@ -13,6 +13,7 @@ public class Menu extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(300, 200);
         setLayout(new BorderLayout());
+        this.setLocationRelativeTo(null); // center form in the screen.
 
         JPanel panel = new JPanel(new GridLayout(4, 1));
 

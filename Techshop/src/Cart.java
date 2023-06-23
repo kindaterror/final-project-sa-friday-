@@ -16,12 +16,13 @@ public class Cart extends JFrame {
     public Cart(ProductCatalog productCatalog) {
         this.productCatalog = productCatalog;
         this.cartItems = new ArrayList<>();
-          this.checkoutFrame = new checkout(this); 
+        this.checkoutFrame = new checkout(this);
 
         setTitle("Cart");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(400, 400);
         setLayout(new BorderLayout());
+        this.setLocationRelativeTo(null); // center form in the screen.
 
         // Create a panel to display the cart items
         cartPanel = new JPanel(new GridLayout(0, 2, 10, 10));
@@ -82,7 +83,7 @@ public class Cart extends JFrame {
     }
 
     private void checkout() {
-         checkoutFrame.setVisible(true);
+        checkoutFrame.setVisible(true);
         this.setVisible(false);
     }
 
@@ -90,5 +91,9 @@ public class Cart extends JFrame {
         if (productCatalog != null) {
             productCatalog.showProductCatalog();
         }
+    }
+
+    public void showCart() {
+        setVisible(true);
     }
 }

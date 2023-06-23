@@ -7,10 +7,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class checkout extends JFrame {
-    private Cart cart;
     private JTextField nameField;
     private JTextArea addressArea;
     private JTextArea productsArea;
+    private Cart cart;
 
     public checkout(Cart cart) {
         this.cart = cart;
@@ -19,6 +19,7 @@ public class checkout extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(400, 400);
         setLayout(new BorderLayout());
+        this.setLocationRelativeTo(null); // center form in the screen.
 
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -70,15 +71,25 @@ public class checkout extends JFrame {
 
         panel.add(formPanel, BorderLayout.CENTER);
 
-        JButton checkoutButton = new JButton("Checkout");
-        checkoutButton.addActionListener(new ActionListener() {
+        JButton proceedToPaymentButton = new JButton("Proceed to Payment");
+        proceedToPaymentButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 performCheckout();
+                openPaymentFrame();
+            }
+        });
+
+        JButton backButton = new JButton("Exit");
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                showCart();
+                dispose();
             }
         });
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        buttonPanel.add(checkoutButton);
+        buttonPanel.add(proceedToPaymentButton);
+        buttonPanel.add(backButton);
 
         panel.add(buttonPanel, BorderLayout.SOUTH);
 
@@ -86,35 +97,54 @@ public class checkout extends JFrame {
     }
 
     private void performCheckout() {
-    String name = nameField.getText();
-    String address = addressArea.getText();
+        String name = nameField.getText();
+        String address = addressArea.getText();
 
-    // Create the checkout message
-    StringBuilder sb = new StringBuilder();
-    sb.append("Name: ").append(name).append("\n");
-    sb.append("Address: ").append(address).append("\n\n");
-    sb.append("Products:\n").append(cart.getProductsAsString());
+        // Create the checkout message
+        StringBuilder sb = new StringBuilder();
+        sb.append("Name: ").append(name).append("\n");
+        sb.append("Address: ").append(address).append("\n\n");
+        sb.append("Products:\n").append(cart.getProductsAsString());
 
-    // Save the checkout details to a text file
-    String directory = "C:/Users/Quirf Ivan A. Onag/final-project-sa-friday-/Techshop/checkout/"; // Update with your desired directory path
-    String fileName = directory + name + ".txt";
-    try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
-        writer.write(sb.toString());
-    } catch (IOException e) {
-        e.printStackTrace();
+        // Save the checkout details to a text file
+        String directory = "C:/Users/Quirf Ivan A. Onag/final-project-sa-friday-/Techshop/checkout/"; // Update with your desired directory path
+        String fileName = directory + name + ".txt";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+            writer.write(sb.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Show a success message
+        String message = "Checkout details saved to file: " + fileName;
+        JOptionPane.showMessageDialog(checkout.this, message, "Checkout", JOptionPane.INFORMATION_MESSAGE);
+
+        // Clear the input fields
+        nameField.setText("");
+        addressArea.setText("");
     }
 
-    // Show a success message
-    String message = "Checkout details saved to file: " + fileName;
-    JOptionPane.showMessageDialog(checkout.this, message, "Checkout", JOptionPane.INFORMATION_MESSAGE);
+    private void openPaymentFrame() {
+        Payment paymentFrame = new Payment(cart);
+        paymentFrame.setVisible(true);
+    }
 
-    // Clear the input fields
-    nameField.setText("");
-    addressArea.setText("");
+    private void showCart() {
+        cart.setVisible(true);
+    }
 
-    // Show the cart and dispose the checkout frame
-    cart.setVisible(true);
-    dispose();
-}
+    public void updateProductsArea() {
+        productsArea.setText(cart.getProductsAsString());
+    }
 
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                Cart cart = new Cart(); // Pass the product catalog reference if available
+                checkout checkoutFrame = new checkout(cart);
+                checkoutFrame.updateProductsArea(); // Update the products area
+                checkoutFrame.setVisible(true);
+            }
+        });
+    }
 }

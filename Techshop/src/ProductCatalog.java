@@ -20,6 +20,7 @@ public class ProductCatalog extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 300);
         setLayout(new BorderLayout());
+        this.setLocationRelativeTo(null); // center form in the screen.
 
         JPanel panel = new JPanel(new BorderLayout()); // Main panel
 
@@ -42,16 +43,13 @@ public class ProductCatalog extends JFrame {
             }
         });
 
-
         JButton adminButton = new JButton("Admin");
         adminButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 openAdminPage();
             }
         });
-        
-  
- 
+
         JButton exitButton = new JButton("Exit");
         exitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -61,11 +59,11 @@ public class ProductCatalog extends JFrame {
 
         JPanel buttonPanel = new JPanel(); // Button panel
         buttonPanel.add(cartButton);
- 
-       if(Login.user.isAdmin()){
-         buttonPanel.add(adminButton);
-       }
-       
+
+        if (Login.user != null && Login.user.isAdmin()) {
+            buttonPanel.add(adminButton);
+        }
+
         buttonPanel.add(exitButton);
 
         panel.add(buttonPanel, BorderLayout.SOUTH); // Add button panel to the SOUTH position
@@ -79,7 +77,7 @@ public class ProductCatalog extends JFrame {
         //admin.setVisible(true);
         setVisible(false);
     }
-    
+
     private void displayProducts(String directoryPath, JPanel panel) {
         JPanel productPanel = new JPanel(new GridLayout(0, 1, 0, 5));
 
@@ -114,14 +112,13 @@ public class ProductCatalog extends JFrame {
     }
 
     public void addToCart(Product product) {
-    if (cart == null) {
-        cart = new Cart(this);
+        if (cart == null) {
+            cart = new Cart(this);
+        }
+        cart.addProduct(product);
+        JOptionPane.showMessageDialog(ProductCatalog.this, "Product added to cart.", "Add to Cart",
+                JOptionPane.INFORMATION_MESSAGE);
     }
-    cart.addProduct(product);
-    JOptionPane.showMessageDialog(ProductCatalog.this, "Product added to cart.", "Add to Cart",
-            JOptionPane.INFORMATION_MESSAGE);
-}
-
 
     private void showCart() {
         if (cart == null) {
@@ -137,16 +134,13 @@ public class ProductCatalog extends JFrame {
 
     public static boolean checkAdminStatus(String email) {
         try {
-            //List<String> lines = Files.readAllLines(Paths.get(USERS_FILE));
-
             List<String> lines = Files.readAllLines(Paths.get(USERS_FILE));
             for (String line : lines) {
                 String[] parts = line.split(",");
-                if (parts[2].equals(email)) {
-                    
-                        if (parts[3].equals("A")) {
-                            return true;
-                        }
+                if (parts.length >= 4 && parts[2].equals(email)) {
+                    if (parts[3].equals("A")) {
+                        return true;
+                    }
                 }
             }
         } catch (IOException e) {

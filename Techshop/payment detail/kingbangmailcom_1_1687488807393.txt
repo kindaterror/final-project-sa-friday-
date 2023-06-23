@@ -1,0 +1,3 @@
+Payment Method: mastercard
+Username: kingban@gmail.com
+Password: qwe
